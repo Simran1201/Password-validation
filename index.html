@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <style>
+        body{
+            /* background-color: darkblue; */
+            background-image: url(https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80ttps://images.unsplash.com/photo-1511300636408-a63a89df3482?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60);
+            background-repeat: no-repeat;
+            background-size:cover ;
+            display: flex;
+            justify-content: center;
+        }
+        .card{            
+            background-color: rgba(255, 255, 255, 0.686);
+            padding-left:  20px;
+            display: inline-block;
+            width: 40%;
+        }
+        .all{
+            margin: 10px auto;        
+        }
+        .txt{
+            font-size: xx-large;
+            font-weight: bolder;
+        }
+        .ip{
+            width: 70%;
+            padding: 10px;
+        }
+        h1{
+            text-align: center;
+            color: rgb(214, 1, 1);
+            font-weight: bolder;
+            font-size: 40px;
+        }
+        .btn{
+            font-size: x-large;
+            font-weight: bolder;
+            text-align: center;
+            margin: 8px;
+            padding: 10px;
+            color: white;
+            background-color: rgb(0, 69, 0);
+            border: 0px;
+            cursor: pointer;
+        }
+        .form{
+            padding: 20px;
+        }
+        .valid{
+            color: green;
+        }
+        .valid::before{
+            position: relative;
+            content: "✔";
+            padding: 15px;
+        }
+        .invalid {
+            color: red;
+        }
+        .invalid:before {
+            position: relative;                       
+            content: "✖";
+            padding: 15px;
+        }
+        .check{
+            padding: 10px;
+        }
+        .show{
+            font-size: large;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding: 10px;
+            color: rgb(85, 84, 84);
+        }
+        .msg{
+            display: none;
+        }
+        @media  screen and (max-width: 1000px) {
+            body{
+                background-size: cover;
+            }
+            .card{
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Login Form</h1>
+        <form>
+            <div class="form">
+                <label for="name" class="all txt">Username</label><br>
+                <input type="text" id="name" required class="all ip"><br>
+                <label for="pswd" class="all txt">Password</label><br>
+                <input type="password" id="pswd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="all ip"  required><br>
+                <input type="checkbox" onclick="check()" class="check"><span class="show">Show Password</span>
+            </div>
+            <input type="submit" id="sub" class="btn" onclick="pop()">
+        </form>
+        <div id="msg" class="msg">
+            <h2>Password must contain the following:</h2>
+            <p id="letter" class="invalid">A<b> lowercase </b>letter</p>
+            <p id="capital" class="invalid">A<b> capital(Upper case) </b>letter</p>
+            <p id="number" class="invalid">A<b> number</b></p>
+            <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+        </div>
+    </div>
+    <script>
+        function pop(){
+            let userName = document.getElementById("name").value;
+            let password = document.getElementById("pswd").value;
+            alert(`
+            User name: ${userName}
+            Password: ${password}
+            `);
+        }
+        //password validation
+        var pswd = document.getElementById("pswd");
+        var letter = document.getElementById("letter");
+        var capital = document.getElementById("capital");
+        var number = document.getElementById("number");
+        var length = document.getElementById("length");
+        pswd.onfocus = function(){
+            document.getElementById("msg").style.display = "block";
+        }
+        pswd.onblur = function(){
+            document.getElementById("msg").style.display = "none";
+        }
+        pswd.onkeyup = function(){
+            var lower = /[a-z]/g;
+            if(pswd.value.match(lower)){
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+            }
+            else{
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+            }
+            //for upper case
+            var upper = /[A-Z]/g;
+            if(pswd.value.match(upper)){
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+            }
+            else{
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+            }
+            //for number
+            var numb = /[0-9]/g;
+            if(pswd.value.match(numb)){
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+            }
+            else{
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+            }
+            //for length
+            if(pswd.value.length >=8){
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+            }
+            else{
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+            }
+        }
+        //password show and hide
+        function check(){
+            if(pswd.type === "password"){
+                pswd.type="text";
+            }
+            else{
+                pswd.type= "password";
+            }
+        }
+        
+    </script>
+</body>
+</html>
