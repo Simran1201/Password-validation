@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Login Form</h1>
+        <form>
+            <div class="form">
+                <label for="name" class="all txt">Username</label><br>
+                <input type="text" id="name" required class="all ip"><br>
+                <label for="pswd" class="all txt">Password</label><br>
+                <input type="password" id="pswd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="all ip"  required><br>
+                <input type="checkbox" onclick="check()" class="check"><span class="show">Show Password</span>
+            </div>
+            <input type="submit" id="sub" class="btn" onclick="pop()">
+        </form>
+        <div id="msg" class="msg">
+            <h2>Password must contain the following:</h2>
+            <p id="letter" class="invalid">A<b> lowercase </b>letter</p>
+            <p id="capital" class="invalid">A<b> capital(Upper case) </b>letter</p>
+            <p id="number" class="invalid">A<b> number</b></p>
+            <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+        </div>
+    </div>
+    <script src="index.js">
+        
+    </script>
+</body>
+</html>
